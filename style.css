@@ -49,7 +49,7 @@ section {
 
 
   /* Background image */
-  background-image: url(hero.jpg);
+  background-image: url (hero.jpg) ;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -238,4 +238,5 @@ section {
   display: flex;
   flex-direction: column;
 }
+
 
