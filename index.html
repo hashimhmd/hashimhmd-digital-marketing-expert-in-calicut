@@ -22,25 +22,86 @@
         <p>SEO, SEM & Instagram growth systems for businesses that want real customers.</p>
       </div>
 
-      <form class="hero-form">
-        <h3>Get a Free Audit</h3>
+      <form id="leadForm" class="hero-form">
 
-        <input type="text" name="firstname" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Email Address" required />
-        <input type="text" name="company" placeholder="Business Name" required />
+  <input type="text" name="firstname" placeholder="Your Name" required>
 
-        <select name="service_interested" required>
-          <option value="" disabled selected hidden>Service Interested In</option>
-          <option>SEO</option>
-          <option>SEM (Google Ads)</option>
-          <option>SMM</option>
-          <option>Instagram Management</option>
-          <option>Graphic Designing</option>
-          <option>Performance Marketing</option>
-        </select>
+  <input type="email" name="email" placeholder="Email Address" required>
 
-        <button type="submit">submit</button>
-      </form>
+  <input type="tel" name="Phone" placeholder="1234567890" required>
+
+  <input type="text" name="company" placeholder="Business Name" required>
+
+  <select name="service_interested" required>
+    <option value="" disabled selected hidden>Service Interested In</option>
+    <option value="SEO">SEO</option>
+    <option value="SEM">SEM (Google Ads)</option>
+    <option value="SMM">SMM</option>
+    <option value="Instagram Management">Instagram Management</option>
+    <option value="Graphic Designing">Graphic Designing</option>
+  </select>
+
+  <button type="submit">Fill the Form</button>
+</form>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("leadForm");
+
+  if (!form) return;
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const portalId = "243828592";
+    const formId = "ad76b1ac-7cce-4cf7-b03c-96a16d2420c3";
+
+    const endpoint = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+
+    const formData = new FormData(form);
+    const fields = [];
+
+    formData.forEach((value, name) => {
+      fields.push({
+        name: name,
+        value: value
+      });
+    });
+
+    const payload = {
+      fields: fields,
+      context: {
+        pageUri: window.location.href,
+        pageName: document.title
+      }
+    };
+
+    fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => {
+      if (response.ok) {
+        // 👉 ADD YOUR THANK YOU PAGE URL BELOW
+        window.location.href = "  ";
+      } else {
+        alert("Submission failed. Please try again.");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      alert("Something went wrong. Please try again.");
+    });
+  });
+});
+</script>
+
+
+
 
     </div>
   </section>
